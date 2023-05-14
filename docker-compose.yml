@@ -1,19 +1,37 @@
-version: '3.8'
+version: "3.9"
 
 services:
-  app:
-    image: contact-form-server
+  api:
     build:
       context: .
+      dockerfile: Dockerfile
     ports:
-      - '3099:3099'
+      - "3099:3099"
+    volumes:
+      - ./app:/app
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/contact-forms
+      - MAIL_SERVER=mail
+      - MAIL_PORT=25
+      - MAIL_USERNAME=
+      - MAIL_PASSWORD=
+      - MAIL_USE_TLS=false
+      - MAIL_DEFAULT_SENDER=contact-form@example.com
     depends_on:
       - mongo
+      - mail
 
   mongo:
     image: mongo:4.4
+    ports:
+      - "27017:27017"
     volumes:
-      - mongo_data:/data/db
+      - ./data:/data/db
 
-volumes:
-  mongo_data:
+  mail:
+    image: analogic/postfix
+    ports:
+      - "25:25"
+    environment:
+      - maildomain=example.com
+      - smtp_user=contact-form@example.com:password
