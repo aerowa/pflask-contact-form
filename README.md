@@ -3,9 +3,16 @@ Python Flask contact form server
 
 
 Swarm:
-
+```
 docker-compose build
 docker stack deploy -c docker-compose.yml contact-form-server
+```
+
+Docker:
+```
+docker-compose build
+docker-compose up -d
+```
 
 ### Usage
 ```
