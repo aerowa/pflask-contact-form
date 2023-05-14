@@ -15,6 +15,8 @@ docker-compose up -d
 ```
 
 ### Usage
+Form:
+
 ```html
 
   <div id="contact-form">
@@ -40,6 +42,7 @@ docker-compose up -d
   </form>
 </div>
 ```
+JS:
 
 ```js
 const form = document.querySelector('#contact-form form');
