@@ -15,7 +15,7 @@ docker-compose up -d
 ```
 
 ### Usage
-```
+```html
 
   <div id="contact-form">
   <h2>Contact Us</h2>
@@ -41,7 +41,8 @@ docker-compose up -d
 </div>
 ```
 
-```const form = document.querySelector('#contact-form form');
+```js
+const form = document.querySelector('#contact-form form');
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
