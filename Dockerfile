@@ -1,10 +1,20 @@
-FROM python:3.9-alpine
+FROM python:3.9-slim-buster
 
-RUN apk add --no-cache mongodb
+# Install Postfix
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y postfix && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
+# Install dependencies
+RUN pip install flask flask-mail pymongo
+
+# Copy the application code
 WORKDIR /app
-COPY requirements.txt /app
-RUN pip install -r requirements.txt
-COPY . /app
+COPY app /app
 
-CMD ["python", "app.py"]
+# Expose the required ports
+EXPOSE 3099 25
+
+# Configure the entrypoint
+CMD ["./entrypoint.sh"]
